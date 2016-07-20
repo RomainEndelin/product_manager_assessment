@@ -1,6 +1,6 @@
 # Assessment - Product Manager
 
-[![Build Status](https://travis-ci.org/RomainEndelin/product_manager_assessment.svg?branch=master)](https://travis-ci.org/RomainEndelin/product_manager_assessment)
+[![Build Status](https://travis-ci.org/RomainEndelin/product_manager_assessment.svg?branch=master)](https://travis-ci.org/RomainEndelin/product_manager_assessment) | [Product Manager](https://product-manager-assessment.herokuapp.com)
 
 This project is a technical assessment for SaleStock's recruitment process. I have chosen to implement a REST API for a product manager.
 
@@ -34,9 +34,9 @@ You can interact with `Product manager` using `curl`, a [Chrome plugin](https://
 * **Run:**
     * `$ rails s`
 
-## Documentation
+## API Documentation
 
-The API is documented with `Apiary.io`. You can access it and **test it** [here](http://docs.productmanagerassessment.apiary.io/).
+The API is documented with [Apiary.io](http://docs.productmanagerassessment.apiary.io/).
 
 ## Implementation Details
 
