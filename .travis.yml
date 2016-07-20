@@ -17,4 +17,3 @@ deploy:
   app: product-manager-assessment
   run:
     - rake db:migrate
-    - rake cleanup
