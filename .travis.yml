@@ -1,0 +1,20 @@
+language: ruby
+sudo: false
+rvm:
+- 2.3.1
+cache: bundler
+branches:
+  only:
+  - master
+script:
+- RAILS_ENV=test bundle exec rake db:schema:load --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: THd0jz+i3IgK97GhJmp49DbH/myKA6t/FdukFW1j58Zxoj0xWWcgl6rLHCifxIC13kK/Ekxg682CpkOnZa5qoHKpjHn0bZy3O0FKpuRFyWVmtWxUEk3LAl4MplVU2ruTu1Soon721xodqHLCT+wVczK1ZuD0fOhI0YaDeWVzcy6aOe50J7zm1q8V/Bde67elolnLixrp2Np5w3WsRveruKTcGAO8G3vDoI1i2t791+0UCQBxsZsMijsjCGPR+oBr543JUM7H1/Cje1w2IYuGoOGEt11VlRcO1gMUGB8Uwo7RFT4onOs/s4UPBet7WGZk2+edYVCUM1A9pISIFy6hfqS1R+kAw/nkHUnxGMEXa9DSsSzQKRxFFGY/XoCS6HoRbC0ivPHPQb7NNHSYL18OzNvoN7qau9t6b/TH8hNnVKtoDjRNUF/hFIiH3jp1y32CoTknqSEt+AtyEsHk5UikyzHY6T7DtgZ1pjNRd9QD2RI7NdqHu2xd/oOy1W9dWxlOjpTJzdq3kdwxPT2G2jgZbv+r5YP3B5JY7NhjCXdVMlyzidrbvWDJuR1GSmNsPNI/lguJxVGKhYyz1JD8D8hj+Y0onVtBGtdsN4XExFfO3FMWrjoppHwdmlACGeToMmVomzBYI18A9kDThqJjXUAY8EBnDesp1lUcrz8nfRRK8mg=
+  app: product-manager-assessment
+  run:
+    - rake db:migrate
+    - rake cleanup
