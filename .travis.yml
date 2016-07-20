@@ -7,9 +7,9 @@ branches:
   only:
   - master
 script:
-- RAILS_ENV=test bundle exec rake db:schema:load --trace
-- bundle exec rake db:test:prepare
-- bundle exec rspec
+- RAILS_ENV=test bin/rake db:schema:load --trace
+- bin/rake db:test:prepare
+- bin/rspec
 deploy:
   provider: heroku
   api_key:
