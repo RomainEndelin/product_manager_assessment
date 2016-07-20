@@ -1,40 +1,317 @@
 FORMAT: 1A
+HOST: https://product-manager-assessment.herokuapp.com
 
-# Product Manager - Assessment
+# Product Manager
 
-Product manager is a simple API, managing products
-    and hierarchical categories of products
+Product manager is a simple API, managing products and hierarchical categories
+of products.
 
-## Products Collection [/products]
+## Products Collection [/products{?color,minsize,maxsize,minprice,maxprice,name}]
+
++ Parameters
+    + color (optional, string) - Filter by color
+    + minsize (optional, number) - Filter by size min (in cm, width + length + height)
+    + maxsize (optional, number) - Filter by size max (in cm, width + length + height)
+    + minprice (optional, number) - Filter by price min (in USD)
+    + maxprice (optional, number) - Filter by price max (in USD)
+    + name (optional, string) - Filter by name
 
 ### List All Products [GET]
+
+You may list all products using this action.
+This list can be filtered by query parameters, so that only elements matching
+these parameters are returned.
 
 + Response 200 (application/json)
 
         [
-            
+            {
+                "id": "1",
+                "name": "My product",
+                "size": "10",
+                "color": "blue",
+                "price": "100",
+                "url": "/product/1",
+                "category_ids": [ "1", "3" ]
+            },
+            {
+                "id": "2",
+                "name": "My second product",
+                "size": "50",
+                "color": "red",
+                "price": "200",
+                "url": "/product/1",
+                "category_ids": [ "2" ]
+            }
         ]
+
+## New product [/product]
 
 ### Create a New Product [POST]
 
 You may create your own product using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+object containing the name, size, color, price and categories.
+You will be redirected to the newly created product.
 
 + Request (application/json)
 
         {
-            
+            "name": "My product",
+            "size": "10",
+            "color": "blue",
+            "price": "100",
+            "category_ids": [ "1", "3" ]
         }
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            Location: /product/1
+
+    + Body
+
+            [
+                {
+                    "id": "1",
+                    "name": "My product",
+                    "size": "10",
+                    "color": "blue",
+                    "price": "100",
+                    "url": "/product/1",
+                    "category_ids": [ "1", "3" ]
+                }
+            ]
+
+## Product [/product/{product_id}]
+
++ Parameters
+    + product_id (number) - ID of the Product
+
+### Show a Product [GET]
+
+You may return informations on a product using this action.
+
++ Response 200 (application/json)
+
+        {
+            "id": "1",
+            "name": "My product",
+            "size": "10",
+            "color": "blue",
+            "price": "100",
+            "url": "/product/1",
+            "category_ids": [ "1", "2" ]
+        }
+
+### Edit a Product [PATCH]
+
+You may edit a product using this action.
+It takes a JSON object containing the name, size, color, price and categories.
+You will be redirected to this product page.
+
++ Request (application/json)
+
+    + Headers
+    
+            Location: /category/1
+            
+    + Body
+    
+            {
+                "name": "My updated product",
+                "size": "10",
+                "color": "blue",
+                "price": "110",
+                "category_ids": [ "1", "2" ]
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /product/1
+
+    + Body
+
+            [
+                {
+                    "id": "1",
+                    "name": "My updated product",
+                    "size": "10",
+                    "color": "blue",
+                    "price": "110",
+                    "url": "/product/1",
+                    "category_ids": [ "1", "2" ]
+                }
+            ]
+
+### Delete a Product [DELETE]
+
+You may delete a product using this action.
+
++ Response 204
+
+## Categories Collection [/categories]
+
+### List Categories [GET]
+
+You may list all categories using this action.
+This view of categories is hierarchical, so that subcategories are embedded
+in their parent categories.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1",
+                "name": "Category1",
+                "url": "/category/1",
+                "product_ids": [ "2" ],
+                "subcategories": []
+            },
+            {
+                "id": "2",
+                "name": "Category2",
+                "url": "/category/2",
+                "product_ids": [ "1", "4" ],
+                "subcategories": [
+                    {
+                        "id": "3",
+                        "name": "Category3",
+                        "url": "/category/3",
+                        "product_ids": [ "2", "1" ],
+                        "subcategories": []
+                    }
+                ]
+            }
+        ]
+
+## All Categories Collection [/categories/all]
+
+### List All Categories [GET]
+
+You may display a flat view of all categories using this action.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "1",
+                "name": "Category1",
+                "url": "/category/1",
+                "parent_category_id": null,
+                "product_ids": [ "2" ],
+                "subcategory_ids": []
+            },
+            {
+                "id": "2",
+                "name": "Category2",
+                "url": "/category/2",
+                "parent_category_id": null,
+                "product_ids": [ "1", "4" ],
+                "subcategory_ids": [ "3" ]
+            }
+            {
+                "id": "3",
+                "name": "Category3",
+                "url": "/category/3",
+                "parent_category_id": "2",
+                "product_ids": [ "2", "1" ],
+                "subcategory_ids": []
+            }
+        ]
+
+## New Category [/category]
+
+### Create a New Category [POST]
+
+You may create a new category using this action. It takes a JSON
+object containing a name and a parent category.
+
++ Request (application/json)
+
+        {
+            "name": "Category2",
+            "parent_category_id": "1"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /category/2
 
     + Body
 
             {
-                
+                "id": "2",
+                "name": "Category2",
+                "url": "/category/2"
+                "product_ids": [],
+                "parent_category_id": "1",
+                "subcategory_ids": []
             }
+
+## Category [/category/{category_id}]
+
++ Parameters
+    + category_id (number) - ID of the Category
+
+### Show a Product [GET]
+
+You may return informations on a category using this action.
+
++ Response 200 (application/json)
+
+        {
+            "id": "1",
+            "name": "Category1",
+            "url": "/category/1"
+            "product_ids": [ "1", "2" ],
+            "parent_category_id": null,
+            "subcategory_ids": [ "2", "3" ]
+        }
+
+### Edit a Product [PATCH]
+
+You may edit a category using this action. It takes a JSON
+object containing a name and a parent category.
+
++ Request (application/json)
+    
+    + Headers
+    
+            Location: /category/1
+    
+    + Body
+
+            {
+                "name": "My updated category",
+                "parent_category_id": "4"
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /category/1
+
+    + Body
+
+            [
+                {
+                    "id": "1",
+                    "name": "My updated category",
+                    "url": "/category/1",
+                    "product_ids": [ "1", "2" ],
+                    "parent_category_id": "4",
+                    "category_ids": [ "2", "3" ]
+                }
+            ]
+
+### Delete a Product [DELETE]
+
+You may delete a product using this action.
+
++ Response 204
