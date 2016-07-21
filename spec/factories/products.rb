@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :product do
-    name { Faker::Book.title }
+    label { Faker::Book.title }
     size { Faker::Number.between(1, 1000) }
     color { Faker::Color.color_name }
     price { Faker::Number.decimal(2) }
@@ -12,7 +12,7 @@ FactoryGirl.define do
     end
 
     factory :invalid_product do
-      name nil
+      label nil
     end
   end
 end

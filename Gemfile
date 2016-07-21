@@ -12,7 +12,6 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'dredd_hooks'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard-rspec',           require: false
@@ -24,6 +23,7 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'dredd_hooks', require: false
+  gem 'rails-controller-testing'
 end
 
 group :production do

@@ -6,7 +6,7 @@ HOST: https://product-manager-assessment.herokuapp.com
 Product manager is a simple API, managing products and hierarchical categories
 of products.
 
-## Products Collection [/products{?color,minsize,maxsize,minprice,maxprice,name}]
+## Products Collection [/products{?color,minsize,maxsize,minprice,maxprice,label}]
 
 + Parameters
     + color: "blue" (optional, string) - Filter by color
@@ -14,7 +14,7 @@ of products.
     + maxsize (optional, number) - Filter by size max (in cm, width + length + height)
     + minprice (optional, number) - Filter by price min (in USD)
     + maxprice (optional, number) - Filter by price max (in USD)
-    + name (optional, string) - Filter by name
+    + label (optional, string) - Filter by label
 
 ### List All Products [GET]
 
@@ -27,7 +27,7 @@ these parameters are returned.
         [
             {
                 "id": "1",
-                "name": "My product",
+                "label": "My product",
                 "size": "10",
                 "color": "blue",
                 "price": "100",
@@ -35,7 +35,7 @@ these parameters are returned.
             },
             {
                 "id": "2",
-                "name": "My second product",
+                "label": "My second product",
                 "size": "50",
                 "color": "red",
                 "price": "200",
@@ -48,13 +48,13 @@ these parameters are returned.
 ### Create a New Product [POST]
 
 You may create your own product using this action. It takes a JSON
-object containing the name, size, color, price and categories.
+object containing the label, size, color, price and categories.
 You will be redirected to the newly created product.
 
 + Request (application/json; charset=utf-8)
 
         {
-            "name": "My product",
+            "label": "My product",
             "size": "10",
             "color": "blue",
             "price": "100",
@@ -72,7 +72,7 @@ You will be redirected to the newly created product.
             [
                 {
                     "id": "1",
-                    "name": "My product",
+                    "label": "My product",
                     "size": "10",
                     "color": "blue",
                     "price": "100",
@@ -93,7 +93,7 @@ You may return informations on a product using this action.
 
         {
             "id": "1",
-            "name": "My product",
+            "label": "My product",
             "size": "10",
             "color": "blue",
             "price": "100",
@@ -103,7 +103,7 @@ You may return informations on a product using this action.
 ### Edit a Product [PATCH]
 
 You may edit a product using this action.
-It takes a JSON object containing the name, size, color, price and categories.
+It takes a JSON object containing the label, size, color, price and categories.
 You will be redirected to this product page.
 
 + Request (application/json; charset=utf-8)
@@ -115,7 +115,7 @@ You will be redirected to this product page.
     + Body
     
             {
-                "name": "My updated product",
+                "label": "My updated product",
                 "size": "10",
                 "color": "blue",
                 "price": "110",
@@ -133,7 +133,7 @@ You will be redirected to this product page.
             [
                 {
                     "id": "1",
-                    "name": "My updated product",
+                    "label": "My updated product",
                     "size": "10",
                     "color": "blue",
                     "price": "110",

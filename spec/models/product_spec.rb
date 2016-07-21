@@ -5,10 +5,10 @@ describe Product do
     expect(build(:product)).to be_valid
   end
 
-  it 'is invalid without a name' do
-    product = build(:product, name: nil)
+  it 'is invalid without a label' do
+    product = build(:product, label: nil)
     product.valid?
-    expect(product.errors[:name]).to include("can't be blank")
+    expect(product.errors[:label]).to include("can't be blank")
   end
 
   it 'is invalid without a color' do

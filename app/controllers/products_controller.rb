@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.filter(params.slice(:color, :label, :minsize, :maxsize, :minprice, :maxprice))
 
     render json: @products
   end
@@ -46,6 +46,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:name, :size, :color, :price)
+      params.require(:product).permit(:label, :size, :color, :price)
     end
 end

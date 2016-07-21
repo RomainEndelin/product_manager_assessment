@@ -15,12 +15,31 @@ describe 'Products API', type: :request do
 
       json = JSON.parse(response.body)
       2.times do |i|
-        expect(json[i]['name']).to eq products[i].name
+        expect(json[i]['label']).to eq products[i].label
         expect(json[i]['color']).to eq products[i].color
         expect(json[i]['price']).to eq products[i].price
         expect(json[i]['size']).to eq products[i].size
         expect(json[i]['category_ids']).to eq products[i].category_ids
       end
+    end
+
+    it 'filters products based on query parameters' do
+      products = []
+      products << FactoryGirl.create(:product, color: "red")
+      products << FactoryGirl.create(:product, color: "blue")
+
+      get "/products?color=blue", nil
+
+      expect(response).to have_http_status(:success)
+      expect(response.header['Content-Type']).to include 'application/json'
+
+      json = JSON.parse(response.body)
+      expect(json[0]['label']).to eq products[1].label
+      expect(json[0]['color']).to eq products[1].color
+      expect(json[0]['price']).to eq products[1].price
+      expect(json[0]['size']).to eq products[1].size
+      expect(json[0]['category_ids']).to eq products[1].category_ids
+      expect(json.length).to eq 1
     end
   end
 
@@ -34,7 +53,7 @@ describe 'Products API', type: :request do
       expect(response.header['Content-Type']).to include 'application/json'
 
       json = JSON.parse(response.body)
-      expect(json['name']).to eq product.name
+      expect(json['label']).to eq product.label
       expect(json['color']).to eq product.color
       expect(json['price']).to eq product.price
       expect(json['size']).to eq product.size
