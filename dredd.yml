@@ -6,7 +6,8 @@ server: rails s
 server-wait: 3
 init: false
 custom:
-  apiaryApiKey: ''
+  apiaryApiKey: '6d4836fe66f1bf0ca9725b3ad0e14fcc'
+  apiaryApiName: 'productmanagerassessment'
 names: false
 only: []
 reporter: apiary
