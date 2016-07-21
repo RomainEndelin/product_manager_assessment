@@ -90,8 +90,8 @@ describe 'Products API', type: :request do
     end
   end
 
-  describe 'POST /products - Create' do
-    it 'creates the products and sends it' do
+  describe 'POST /products/:id - Update' do
+    it 'Updates the products and sends it' do
       category1 = create(:category)
       category2 = create(:category)
       category3 = create(:category)
@@ -116,6 +116,16 @@ describe 'Products API', type: :request do
       expect(json['price']).to eq 110
       expect(json['size']).to eq 10
       expect(json['category_ids']).to eq [category1.id, category3.id]
+    end
+  end
+
+  describe 'DELETE /product - Destroy' do
+    it 'Deletes the product' do
+      product = create(:product)
+      expect {
+        delete "/products/#{product.id}"
+      }.to change(Product, :count).by(-1)
+      expect(response).to have_http_status(:no_content)
     end
   end
 end
