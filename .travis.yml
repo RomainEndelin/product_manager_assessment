@@ -1,3 +1,4 @@
+dist: trusty
 language: ruby
 sudo: false
 rvm:
@@ -6,9 +7,15 @@ cache: bundler
 branches:
   only:
     - master
+install:
+  - npm install -g dredd
+  - bundle install
 script:
-  - bin/rake db:migrate RAILS_ENV=test --trace
+  - bin/rails db:migrate RAILS_ENV=test --trace
   - bin/rspec
+  - bin/rails db:migrate
+  - bin/rails db:seed
+  - CI=travis dredd
 deploy:
   provider: heroku
   api_key:

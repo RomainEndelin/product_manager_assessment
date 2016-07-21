@@ -8,17 +8,21 @@
 #
 
 cat1 = Category.create({
+  "id": "1",
   "name": "Category1"
 })
 cat2 = Category.create({
+  "id": "2",
   "name": "Category2"
 })
 cat3 = Category.create({
+  "id": "3",
   "name": "Category3"
 })
 
 Product.create({
-  name: "My product",
+  "id": "1",
+  label: "My product",
   size: 10,
   color: "blue",
   price: 100,
@@ -26,7 +30,8 @@ Product.create({
 })
 
 Product.create({
-  name: "My second product",
+  "id": "2",
+  label: "My second product",
   size: 50,
   color: "red",
   price: 200,
