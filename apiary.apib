@@ -108,38 +108,26 @@ You will be redirected to this product page.
 
 + Request (application/json; charset=utf-8)
 
-    + Headers
-    
-            Location: /categories/1
-            
-    + Body
-    
-            {
-                "product": {
-                    "label": "My updated product",
-                    "size": "10",
-                    "color": "blue",
-                    "price": "110",
-                    "category_ids": [ "1", "2" ]
-                }
-            }
-
-+ Response 200 (application/json; charset=utf-8)
-
-    + Headers
-
-            Location: /products/1
-
-    + Body
-
-            {
-                "id": "1",
+        {
+            "product": {
                 "label": "My updated product",
                 "size": "10",
                 "color": "blue",
                 "price": "110",
                 "category_ids": [ "1", "2" ]
             }
+        }
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "id": "1",
+            "label": "My updated product",
+            "size": "10",
+            "color": "blue",
+            "price": "110",
+            "category_ids": [ "1", "2" ]
+        }
 
 ### Delete a Product [DELETE]
 

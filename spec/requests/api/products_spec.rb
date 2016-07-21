@@ -89,4 +89,33 @@ describe 'Products API', type: :request do
       expect(json['category_ids']).to eq [1, 3]
     end
   end
+
+  describe 'POST /products - Create' do
+    it 'creates the products and sends it' do
+      category1 = create(:category)
+      category2 = create(:category)
+      category3 = create(:category)
+      product = create(:product, categories: [category1, category2])
+      new_attributes = {
+        product: {
+          label: 'My updated product',
+          size: 10,
+          color: 'blue',
+          price: 110,
+          category_ids: [category1.id, category3.id]
+        }
+      }
+      patch "/products/#{product.id}", params: new_attributes, as: :json
+
+      expect(response).to have_http_status(:success)
+      expect(response.header['Content-Type']).to include 'application/json'
+
+      json = JSON.parse(response.body)
+      expect(json['label']).to eq 'My updated product'
+      expect(json['color']).to eq 'blue'
+      expect(json['price']).to eq 110
+      expect(json['size']).to eq 10
+      expect(json['category_ids']).to eq [category1.id, category3.id]
+    end
+  end
 end

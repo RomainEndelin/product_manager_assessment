@@ -16,10 +16,6 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(product_params)
-    params[:product][:category_ids].each do |category_id|
-      @product.category_ids << category_id
-    end
-
 
     if @product.save
       render json: @product, status: :created, location: @product
@@ -50,6 +46,6 @@ class ProductsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def product_params
-      params.require(:product).permit(:label, :size, :color, :price)
+      params.require(:product).permit(:label, :size, :color, :price, category_ids: [])
     end
 end
