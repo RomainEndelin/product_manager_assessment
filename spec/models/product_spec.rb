@@ -41,4 +41,17 @@ describe Product do
     expect(product.errors[:price]).to include("must be greater than 0")
   end
 
+  describe 'Category association' do
+    it 'is valid with no category' do
+      product = build(:product_without_category)
+      expect(product.categories.count).to eq 0
+    end
+
+    it 'is valid with multiple categories' do
+      product = build(:product_without_category)
+      product.categories << build(:category)
+      product.categories << build(:category)
+      expect(product.categories.length).to eq 2
+    end
+  end
 end

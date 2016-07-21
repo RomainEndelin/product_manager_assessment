@@ -4,13 +4,12 @@ FactoryGirl.define do
     size { Faker::Number.between(1, 1000) }
     color { Faker::Color.color_name }
     price { Faker::Number.decimal(2) }
+    categories { build_list :category_without_product, 3 }
 
-    # after(:build) do |product|
-    #   [:category1, :category2].each do |category|
-    #     product.categories << FactoryGirl.build(:category,
-    #                                             name: category)
-    #   end
-    # end
+    factory :product_without_category do
+      # Avoid a recursive loop between product and category creation
+      categories []
+    end
 
     factory :invalid_product do
       name nil
