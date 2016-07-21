@@ -23,6 +23,7 @@ group :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'dredd_hooks', require: false
 end
 
 group :production do

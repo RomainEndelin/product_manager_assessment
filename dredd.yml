@@ -1,5 +1,5 @@
 dry-run: null
-hookfiles: null
+hookfiles: ./spec/dredd_hooks/hooks.rb
 language: ruby
 sandbox: false
 server: rails s
