@@ -16,6 +16,10 @@ class ProductsController < ApplicationController
   # POST /products
   def create
     @product = Product.new(product_params)
+    params[:product][:category_ids].each do |category_id|
+      @product.category_ids << category_id
+    end
+
 
     if @product.save
       render json: @product, status: :created, location: @product

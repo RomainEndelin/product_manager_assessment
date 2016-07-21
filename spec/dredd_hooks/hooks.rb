@@ -1,7 +1,6 @@
 include DreddHooks::Methods
 
 skipped = [
-  "New Product > Create a New Product",
   "Product > Edit a Product",
   "Product > Delete a Product",
   "Categories Collection > List Categories",
