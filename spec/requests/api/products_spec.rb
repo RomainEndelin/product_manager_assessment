@@ -15,6 +15,7 @@ describe 'Products API', type: :request do
 
       json = JSON.parse(response.body)
       products.each_with_index do |product, i|
+        expect(json[i]['id']).to eq product.id
         expect(json[i]['label']).to eq product.label
         expect(json[i]['color']).to eq product.color
         expect(json[i]['price']).to eq product.price
@@ -34,6 +35,7 @@ describe 'Products API', type: :request do
       expect(response.header['Content-Type']).to include 'application/json'
 
       json = JSON.parse(response.body)
+      expect(json[0]['id']).to eq products[1].id
       expect(json[0]['label']).to eq products[1].label
       expect(json[0]['color']).to eq products[1].color
       expect(json[0]['price']).to eq products[1].price
@@ -53,6 +55,7 @@ describe 'Products API', type: :request do
       expect(response.header['Content-Type']).to include 'application/json'
 
       json = JSON.parse(response.body)
+      expect(json['id']).to eq product.id
       expect(json['label']).to eq product.label
       expect(json['color']).to eq product.color
       expect(json['price']).to eq product.price
@@ -111,6 +114,7 @@ describe 'Products API', type: :request do
       expect(response.header['Content-Type']).to include 'application/json'
 
       json = JSON.parse(response.body)
+      expect(json['id']).to eq product.id
       expect(json['label']).to eq 'My updated product'
       expect(json['color']).to eq 'blue'
       expect(json['price']).to eq 110

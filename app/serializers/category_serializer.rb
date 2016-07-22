@@ -1,7 +1,6 @@
 class CategorySerializer < ActiveModel::Serializer
   attributes :id, :name, :parent_category_id, :subcategory_ids
   has_many :product_ids
-  has_many :child_ids
 
   def subcategory_ids
     object.child_ids
