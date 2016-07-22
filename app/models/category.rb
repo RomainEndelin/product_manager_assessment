@@ -3,6 +3,7 @@ class Category < ApplicationRecord
   acts_as_tree order: :name
   validates :name, presence: true
   validate :loop_validation
+  alias_attribute :parent_category_id, :parent_id
 
   def loop_validation
     if loops?(self)

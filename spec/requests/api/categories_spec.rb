@@ -74,4 +74,29 @@ describe 'Categories API', type: :request do
       expect(json['product_ids']).to eq category.product_ids
     end
   end
+
+  describe 'POST /categories - Create' do
+    it 'creates the category and sends it' do
+      category1 = create(:category, parent: nil)
+      new_attributes = {
+        category: {
+          name: 'Category2',
+          parent_category_id: category1.id
+        }
+      }
+      expect {
+        post "/categories", params: new_attributes, as: :json
+      }.to change(Category, :count).by(1)
+
+      expect(response).to have_http_status(:created)
+      expect(response.header['Content-Type']).to include 'application/json'
+
+      json = JSON.parse(response.body)
+      expect(response.location).to include "categories/#{json['id']}"
+      expect(json['name']).to eq 'Category2'
+      expect(json['parent_category_id']).to eq category1.id
+      expect(json['subcategory_ids']).to eq []
+      expect(json['product_ids']).to eq []
+    end
+  end
 end

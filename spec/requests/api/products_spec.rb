@@ -78,7 +78,9 @@ describe 'Products API', type: :request do
           category_ids: [1, 3]
         }
       }
-      post "/products", params: new_attributes, as: :json
+      expect {
+        post "/products", params: new_attributes, as: :json
+      }.to change(Product, :count).by(1)
 
       expect(response).to have_http_status(:created)
       expect(response.header['Content-Type']).to include 'application/json'
@@ -93,7 +95,7 @@ describe 'Products API', type: :request do
     end
   end
 
-  describe 'POST /products/:id - Update' do
+  describe 'PATCH /products/:id - Update' do
     it 'Updates the products and sends it' do
       category1 = create(:category)
       category2 = create(:category)
