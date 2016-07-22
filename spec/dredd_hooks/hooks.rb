@@ -1,7 +1,6 @@
 include DreddHooks::Methods
 
 skipped = [
-  "Category > Edit a Category",
   "Category > Delete a Category",
 ]
 

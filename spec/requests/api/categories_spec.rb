@@ -99,4 +99,34 @@ describe 'Categories API', type: :request do
       expect(json['product_ids']).to eq []
     end
   end
+
+  describe 'PATCH /categories/:id - Update' do
+    it 'Updates the category and sends it' do
+      products = Array.new(2) { create(:product) }
+      category = create(:category,
+                        name: "My category",
+                        parent: nil,
+                        products: products)
+      root = create(:category)
+      childs = Array.new(2) { create(:category, parent: category) }
+      # child1 = create(:category, parent: category)
+      # child2 = create(:category, parent: category)
+      new_attributes = {
+        category: {
+          name: 'My updated category',
+          parent_category_id: root.id
+        }
+      }
+      patch "/categories/#{category.id}", params: new_attributes, as: :json
+
+      expect(response).to have_http_status(:success)
+      expect(response.header['Content-Type']).to include 'application/json'
+
+      json = JSON.parse(response.body)
+      expect(json['name']).to eq 'My updated category'
+      expect(json['parent_category_id']).to eq root.id
+      expect(json['subcategory_ids']).to match_array(childs.map { |child| child.id })
+      expect(json['product_ids']).to match_array(products.map { |product| product.id })
+    end
+  end
 end
