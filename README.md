@@ -13,7 +13,7 @@ It includes the following features:
 ## API Documentation
 
 The API is documented with [Apiary.io](http://docs.productmanagerassessment.apiary.io/).
-An up-to-date validated in generated in the ["Test" section](https://app.apiary.io/productmanagerassessment/tests/runs#ci).
+An up-to-date validation is generated in the "Test" section (available for registered members of the project).
 
 ## Usage
 
@@ -59,7 +59,7 @@ The design of the API has been domain-driven, thanks to the use of [Apiary.io](h
 The focus has been put on quality and reliability rather than scope. So the API is rather basic, but thanks to the test coverage and the CI infrastructure, it could be easily extended or refactored.
 
 The project includes a Continuous Integration and Continuous Deployment infrastructure, based on [Github](https://github.com/RomainEndelin/product_manager_assessment), [TravisCI](https://travis-ci.org/RomainEndelin/product_manager_assessment) and [Heroku](https://product-manager-assessment.herokuapp.com).
-As part of the Continuous Integration process, the API is continuously tested against its specification (using [*Dredd*](https://github.com/apiaryio/dredd)), and the results are reported into *Apiary.io*. This guarantees the documentation to be always up-to-date.
+As part of the Continuous Integration process, the API is continuously tested against its specification (using [*Dredd*](https://github.com/apiaryio/dredd)), and the results are reported into *Apiary.io* (for registered user). This guarantees the documentation to be always up-to-date.
 
 ## Perspectives
 
