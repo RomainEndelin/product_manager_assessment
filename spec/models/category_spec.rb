@@ -46,5 +46,28 @@ describe Category do
       category.children << build(:category)
       expect(category.children.length).to eq 2
     end
+
+    it 'can not be its own parent' do
+      category1 = create(:category, parent: nil)
+      category1.parent = category1
+      category1.valid?
+      expect(category1.errors[:parent]).to include("can't loop over parent categories")
+    end
+
+    it 'can not include loop in hierarchies' do
+      category1 = create(:category, parent: nil)
+      category2 = create(:category, parent: category1)
+      category3 = create(:category, parent: category2)
+      category1.parent = category3
+      category1.valid?
+      expect(category1.errors[:parent]).to include("can't loop over parent categories")
+    end
+
+    it 'can include chain of hierarchy without loop' do
+      category1 = create(:category, parent: nil)
+      category2 = create(:category, parent: category1)
+      category3 = create(:category, parent: category2)
+      expect(category3).to be_valid
+    end
   end
 end
