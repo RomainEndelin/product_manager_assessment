@@ -54,12 +54,15 @@ You may also interact with the production server directly from [Apiary.io](http:
 This assessment has been developed with Ruby on Rails 5, in API mode. It has been developed through Test-Driven-Development.
 As such, it is fully test-covered.
 The project follows a very straightforward Rails architecture, and functional tests are located in `spec/requests/api`.
+The API documentation is located in `apiary.apib`.
 
 The design of the API has been domain-driven, thanks to the use of [Apiary.io](http://docs.productmanagerassessment.apiary.io/) (based on [API Blueprint](https://apiblueprint.org/)) and [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/1662965).
 The focus has been put on quality and reliability rather than scope. So the API is rather basic, but thanks to the test coverage and the CI infrastructure, it could be easily extended or refactored.
 
 The project includes a Continuous Integration and Continuous Deployment infrastructure, based on [Github](https://github.com/RomainEndelin/product_manager_assessment), [TravisCI](https://travis-ci.org/RomainEndelin/product_manager_assessment) and [Heroku](https://product-manager-assessment.herokuapp.com).
-As part of the Continuous Integration process, the API is continuously tested against its specification (using [*Dredd*](https://github.com/apiaryio/dredd)), and the results are reported into *Apiary.io* (for registered user). This guarantees the documentation to be always up-to-date.
+As part of the Continuous Integration process, the API is continuously tested against its specification (using [*Dredd*](https://github.com/apiaryio/dredd)), and the results are reported into *Apiary.io* (for registered user, as shown in the image below). This guarantees the documentation to be always up-to-date.
+
+![Apiary API test](resources/api_tests.png)
 
 ## Perspectives
 
