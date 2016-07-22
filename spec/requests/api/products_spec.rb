@@ -125,7 +125,7 @@ describe 'Products API', type: :request do
     end
   end
 
-  describe 'DELETE /product - Destroy' do
+  describe 'DELETE /products - Destroy' do
     it 'Deletes the product' do
       product = create(:product)
       expect {

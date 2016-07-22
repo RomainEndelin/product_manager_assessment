@@ -129,4 +129,14 @@ describe 'Categories API', type: :request do
       expect(json['product_ids']).to match_array(products.map { |product| product.id })
     end
   end
+
+  describe 'DELETE /categories - Destroy' do
+    it 'Deletes the categories' do
+      category = create(:category)
+      expect {
+        delete "/categories/#{category.id}"
+      }.to change(Category, :count).by(-1)
+      expect(response).to have_http_status(:no_content)
+    end
+  end
 end
