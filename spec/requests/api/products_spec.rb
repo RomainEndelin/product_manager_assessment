@@ -14,12 +14,12 @@ describe 'Products API', type: :request do
       expect(response.header['Content-Type']).to include 'application/json'
 
       json = JSON.parse(response.body)
-      2.times do |i|
-        expect(json[i]['label']).to eq products[i].label
-        expect(json[i]['color']).to eq products[i].color
-        expect(json[i]['price']).to eq products[i].price
-        expect(json[i]['size']).to eq products[i].size
-        expect(json[i]['category_ids']).to eq products[i].category_ids
+      products.each_with_index do |product, i|
+        expect(json[i]['label']).to eq product.label
+        expect(json[i]['color']).to eq product.color
+        expect(json[i]['price']).to eq product.price
+        expect(json[i]['size']).to eq product.size
+        expect(json[i]['category_ids']).to eq product.category_ids
       end
     end
 
