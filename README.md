@@ -13,7 +13,7 @@ It includes the following features:
 ## API Documentation
 
 The API is documented with [Apiary.io](http://docs.productmanagerassessment.apiary.io/).
-Its current implementation is validated in the [Test section](https://app.apiary.io/productmanagerassessment/tests/runs#ci).
+An up-to-date validated in generated in the ["Test" section](https://app.apiary.io/productmanagerassessment/tests/runs#ci).
 
 ## Usage
 
@@ -44,7 +44,7 @@ You may also interact with the production server directly from [Apiary.io](http:
     * `bin/rails db:test:prepare`
     * `bin/rspec` OR `bin/guard`
 * **Test the API:**
-    * `bin/rails db:reset` *(the API testing depends on the initial seed)*
+    * `bin/rails db:reset` *(the API testing depends on the initial seed data)*
     * `dredd --sorted`
 * **Run:**
     * `$ rails s`
@@ -55,10 +55,10 @@ This assessment has been developed with Ruby on Rails 5, in API mode. It has bee
 As such, it is fully test-covered.
 The project follows a very straightforward Rails architecture, and functional tests are located in `spec/requests/api`.
 
-The design of the API has been domain-driven, thanks to the use of *Apiary.io* (based on *Blueprint API*) and *Pivotal Tracker*.
-The focus has been put on quality and reliability rather than scope. So the API is rather basic, but thanks to the test coverage and the CI infrastructure, it could be easily extended.
+The design of the API has been domain-driven, thanks to the use of [Apiary.io](http://docs.productmanagerassessment.apiary.io/) (based on [API Blueprint](https://apiblueprint.org/)) and [Pivotal Tracker](https://www.pivotaltracker.com/n/projects/1662965).
+The focus has been put on quality and reliability rather than scope. So the API is rather basic, but thanks to the test coverage and the CI infrastructure, it could be easily extended or refactored.
 
-The project includes a Continuous Integration and Continuous Deployment infrastructure, based on *Github*, *TravisCI* and *Heroku*.
+The project includes a Continuous Integration and Continuous Deployment infrastructure, based on [Github](https://github.com/RomainEndelin/product_manager_assessment), [TravisCI](https://travis-ci.org/RomainEndelin/product_manager_assessment) and [Heroku](https://product-manager-assessment.herokuapp.com).
 As part of the Continuous Integration process, the API is continuously tested against its specification (using [*Dredd*](https://github.com/apiaryio/dredd)), and the results are reported into *Apiary.io*. This guarantees the documentation to be always up-to-date.
 
 ## Perspectives
